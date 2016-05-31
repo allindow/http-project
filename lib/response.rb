@@ -8,18 +8,18 @@ class Response
     parser = Parser.new(request_lines)
     response = "<pre>" + request_lines.join("\n") + "</pre>"
     output = "<html><head></head><body>#{response}</body></html>"
-    headers = ["Verb: #{parser.verb}",
-        "Path: #{parser.path}",
-        "Protocol: #{parser.protocol}",
-        "Host: #{parser.host}",
-        "Port: #{parser.port}",
-        "Origin: #{parser.host}",
-        "#{parser.accept}"]
+    headers = ["Verb: #{parser.get_verb}",
+        "Path: #{parser.get_path}",
+        "Protocol: #{parser.get_protocol}",
+        "Host: #{parser.get_host}",
+        "Port: #{parser.get_port}",
+        "Origin: #{parser.get_host}",
+        "#{parser.get_accept}"]
 
     client.puts headers
     client.puts "Hello World #{counter}"
 
-
+    client.puts request_lines.inspect
     client.close
 end
 

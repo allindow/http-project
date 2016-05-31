@@ -9,27 +9,27 @@ def initialize(request_lines)
   @request_lines = request_lines
 end
 
-def verb
+def get_verb
   request_lines[0].split(" ")[0]
 end
 
-def path
+def get_path
   request_lines[0].split(" ")[1]
 end
 
-def protocol
+def get_protocol
   request_lines[0].split(" ")[2]
 end
 
-def host
-  request_lines[1].split(":")[1]
+def get_host
+  request_lines[1].split(":")[1].strip
 end
 
-def port
+def get_port
   request_lines[1].split(":")[2]
 end
 
-def accept
-  request_lines[4]
+def get_accept
+  request_lines[3]
 end
 end
