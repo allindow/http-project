@@ -30,6 +30,7 @@ def get_port
 end
 
 def get_accept
-  request_lines[3]
+  accept_index = request_lines.find_index{|word| word.match( /Accept:/ ) }
+  request_lines[accept_index]
 end
 end

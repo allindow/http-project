@@ -9,7 +9,6 @@ class Server
   def initialize
     @response = Response.new
     @tcp_server = TCPServer.new(9292)
-    # @parser = Parser.new
   end
 
   def open
