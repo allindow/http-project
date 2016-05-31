@@ -4,8 +4,7 @@ require "./response"
 
 class Parser
 
-def initialize(request_lines)
-end
+
 
 def verb
   request_lines[0].split(" ")[0]

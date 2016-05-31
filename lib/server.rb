@@ -1,33 +1,28 @@
-require 'socket'
-require "./response"
-require "./parser"
-tcp_server = TCPServer.new(9292)
-counter = 0
-loop do
-  counter += 1
-client = tcp_server.accept
+require "socket"
+require "./lib/response"
+# require "./lib/parser"
 
-request_lines = []
+class Server
 
-while line = client.gets and !line.chomp.empty?
-  request_lines << line.chomp
-end
+  def initialize
+    @response = Response.new
+    @tcp_server = TCPServer.new(9292)
+    # @parser = Parser.new
+  end
 
+  def open
+    counter = 0
+    loop do
+      counter += 1
+      client = @tcp_server.accept
+      request_lines = []
 
-response = "<pre>" + request_lines.join("\n") + "</pre>"
-output = "<html><head></head><body>#{response}</body></html>"
-headers = ["Verb: POST",
-          "Path: /",
-          "Protocol: HTTP/1.1",
-          "#{request_lines[0]}",
-          "Port: 9292",
-          "Origin: 127.0.0.1",
-          "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"]
+      while line = client.gets and !line.chomp.empty?
+        request_lines << line.chomp
+      end
 
-
-client.puts headers
-client.puts "Hello World #{counter}"
-
-client.close
-
+      @response.send_response(client,counter, request_lines)
+    end
+  end
+  Server.new.open
 end
