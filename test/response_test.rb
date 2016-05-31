@@ -1,0 +1,6 @@
+require 'minitest/autorun'
+require 'minitest/pride'
+# require 'faraday'
+require './lib/server'
+require 'pry'
+require './lib/parser'
