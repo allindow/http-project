@@ -1,8 +1,10 @@
 require "socket"
 require "./lib/response"
 # require "./lib/parser"
+require "pry"
 
 class Server
+
 
   def initialize
     @response = Response.new
@@ -24,5 +26,6 @@ class Server
       @response.send_response(client,counter, request_lines)
     end
   end
-  Server.new.open
 end
+
+Server.new.open
