@@ -1,11 +1,12 @@
-require "./server"
-require "socket"
-require "./response"
+# require "./lib/server"
+# # require "socket"
+# require "./lib/response"
 
 class Parser
+attr_reader :request_lines
 
 def initialize(request_lines)
-
+  @request_lines = request_lines
 end
 
 def verb
@@ -26,4 +27,9 @@ end
 
 def port
   request_lines[1].split(":")[2]
+end
+
+def accept
+  request_lines[4]
+end
 end
