@@ -7,7 +7,7 @@ class Server
 attr_reader :request_lines
 
   def initialize
-    @response = Response.new(request_lines)
+    @response = Response.new
     @tcp_server = TCPServer.new(9292)
     @request_lines = []
   end
