@@ -17,25 +17,21 @@ class Response
 
 
   def info(request)
-    info = ["<html>Verb: #{parser.get_verb(request.flatten)}",
+    ["Verb: #{parser.get_verb(request.flatten)}",
       "Path: #{parser.get_path(request.flatten)}",
       "Protocol: #{parser.get_protocol(request.flatten)}",
       "Host: #{parser.get_host(request.flatten)}",
       "Port: #{parser.get_port(request.flatten)}",
       "Origin: #{parser.get_host(request.flatten)}",
-      "#{parser.get_accept(request.flatten)}</html>"]
-      info
+      "#{parser.get_accept(request.flatten)}"]
   end
 
   def main_response
-    response = "<pre>" + info(request.flatten).join("\n") + "</pre>"
-    response
+    "<pre>" + [info(request.flatten)].join("\n") + "</pre>"
   end
 
-
-  def output(response = main_response)
-    output = "<html><head></head><body>#{response}</body></html>"
-    output
+  def main_output(response=main_response)
+    "<html><head></head><body>#{response}</body></html>"
   end
 
   def headers
@@ -43,31 +39,28 @@ class Response
               "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
               "server: ruby",
               "content-type: text/html; charset=iso-8859-1",
-              "content-length: #{output.length}\r\n\r\n"].join("\r\n")
+              "content-length: #{main_output.length}\r\n\r\n"].join("\r\n")
       headers
   end
+
 
   def path_controller(client,hello_counter,counter,request_lines)
     request << request_lines
     case parser.get_path(request_lines)
     when '/'
       client.puts headers
-      client.puts output
+      client.puts main_output
     when '/hello'
-      client.puts headers
-
-      # client.puts "Hello World #{hello_counter}"
-      client.puts output("Hello World #{hello_counter}")
+      hello_response = "<pre>" + "Hello World #{hello_counter}\n" + "</pre>"
+      client.puts main_output(hello_response)
     when '/datetime'
-      client.puts headers
-      client.puts output(date_and_time)
+      client.puts date_and_time
     when '/shutdown'
-      client.puts headers
-      client.puts output("Total Requests: #{counter}")
+      client.puts "Total Requests: #{counter}"
     else
-      client.puts headers
-      client.puts output("Check this guy out, he thinks #{parser.get_path(request_lines)} is a thing! It's not. Sorry.")
+      client.puts "Check this guy out, he thinks #{parser.get_path(request_lines)} is a thing! It's not. Sorry."
     end
     client.close
+    request.slice!(0..-1)
   end
 end
