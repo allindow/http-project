@@ -27,12 +27,13 @@ class Response
       info
   end
 
-  def response
+  def main_response
     response = "<pre>" + info(request.flatten).join("\n") + "</pre>"
     response
   end
 
-  def output
+
+  def output(response = main_response)
     output = "<html><head></head><body>#{response}</body></html>"
     output
   end
@@ -53,13 +54,19 @@ class Response
       client.puts headers
       client.puts output
     when '/hello'
-      client.puts "Hello World #{hello_counter}"
+      client.puts headers
+
+      # client.puts "Hello World #{hello_counter}"
+      client.puts output("Hello World #{hello_counter}")
     when '/datetime'
-      client.puts date_and_time
+      client.puts headers
+      client.puts output(date_and_time)
     when '/shutdown'
-      client.puts "Total Requests: #{counter}"
+      client.puts headers
+      client.puts output("Total Requests: #{counter}")
     else
-      client.puts "Check this guy out, he thinks #{parser.get_path(request_lines)} is a thing! It's not. Sorry."
+      client.puts headers
+      client.puts output("Check this guy out, he thinks #{parser.get_path(request_lines)} is a thing! It's not. Sorry.")
     end
     client.close
   end
