@@ -5,6 +5,7 @@
 class Parser
 
 
+
 def get_verb(request_lines)
   request_lines[0].split(" ")[0]
 end
