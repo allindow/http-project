@@ -32,14 +32,13 @@ class Response
   end
 
   def request_info(request_lines)
-    output = ["<pre>Verb: #{parser.get_verb(request_lines)}",
+    output = ["<html>Verb: #{parser.get_verb(request_lines)}",
       "Path: #{parser.get_path(request_lines)}",
       "Protocol: #{parser.get_protocol(request_lines)}",
       "Host: #{parser.get_host(request_lines)}",
       "Port: #{parser.get_port(request_lines)}",
       "Origin: #{parser.get_host(request_lines)}",
-      "#{parser.get_accept(request_lines)}</pre>"]
+      "#{parser.get_accept(request_lines)}</html>"]
     output
   end
-
 end

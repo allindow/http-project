@@ -32,3 +32,6 @@ attr_reader :request_lines
 end
 
 Server.new.open
+# if __FILE__ == $PROGRAM_NAME
+#  server = Server.new
+# end
