@@ -29,6 +29,12 @@ class SeverTest < Minitest::Test
     assert response.success?
   end
 
+  def test_unlisted_page_returns_blue_pill_message
+    response = Faraday.get('http://127.0.0.1:9292/word_search?word=candy')
+    assert response.body.include?("CANDY")
+    assert response.success?
+  end
+
   def test_shutdown_page_closes_server
     skip
     response = Faraday.get('http://127.0.0.1:9292/shutdown')

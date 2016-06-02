@@ -31,8 +31,4 @@ class ResponseTest < Minitest::Test
     assert_equal time_now, response.date_and_time
   end
 
-  def test_formatter_provides_html_formatting
-    assert_equal "<html><head></head><body>" + "hello" + "</body></html>", response.formatter("hello")
-  end
-
 end

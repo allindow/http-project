@@ -17,24 +17,20 @@ class Response
     word             = path.split(/\W+/)[-1]
     case path
     when '/'
-      formatter("<pre>" + main_output(request_lines).join("\n") + "</pre>")
+      "<pre>" + main_output(request_lines).join("\n") + "</pre>"
     when '/hello'
       @hello_counter += 1
-      formatter("Hello World #{hello_counter}\n")
+      "Hello World #{hello_counter}\n"
     when '/datetime'
-      formatter(date_and_time)
+      date_and_time
     when '/shutdown'
-      formatter("Total Requests: #{request_counter}")
+      "Total Requests: #{request_counter}"
     when "/word_search?word=#{word}"
       word_search = WordSearch.new(word)
       word_search.result
     else
-      formatter("Nothing to see here. Take the blue pill & return to the Matrix.")
+      "Nothing to see here. Take the blue pill & return to the Matrix."
     end
-  end
-
-  def formatter(response)
-    "<html><head></head><body>" + response + "</body></html>"
   end
 
   def date_and_time
