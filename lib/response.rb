@@ -3,15 +3,20 @@ require "./lib/word_search.rb"
 
 class Response
   attr_reader        :request_counter,
-                     :hello_counter
+                     :hello_counter,
+                     :request_lines,
+                     :path_hash
 
-  def initialize
+  def initialize(request_lines)
     @request_counter = 0
     @hello_counter   = -1
+    @request_lines   = request_lines
+    @path_hash       = {}
   end
 
 
-  def path_controller(request_lines)
+
+  def path_controller
     @request_counter += 1
     path             = request_lines[0].split(" ")[1]
     word             = path.split(/\W+/)[-1]
