@@ -32,10 +32,6 @@ class ResponseTest < Minitest::Test
     assert_equal time_now, response.date_and_time
   end
 
-  def test_formatter_provides_html_formatting
-    assert_equal   "<html><head></head><body>" + "hello" + "</body></html>", response.formatter("hello")
-  end
-
   def test_if_word_exists_returns_true
     skip
     assert response.word_exists?(test_request)

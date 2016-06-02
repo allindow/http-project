@@ -18,8 +18,8 @@ attr_reader  :request_lines,
     assert_equal "GET", response.get_verb
   end
 
-  def test_get_word_parameter_returns_word_parameter
-    assert_equal "matrix", response.get_word_parameter
+  def test_get_word_returns_word_parameter
+    assert_equal "matrix", response.get_word
   end
 
   def test_get_path_returns_path
