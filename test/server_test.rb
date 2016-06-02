@@ -1,9 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'faraday'
-# require './lib/server'
-require 'pry'
-#
+require 'rake/testtask'
+
 class SeverTest < Minitest::Test
 
   def test_server_response_shows_verb_in_body

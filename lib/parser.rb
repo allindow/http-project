@@ -1,22 +1,14 @@
-# require "./lib/server"
-# # require "socket"
-# require "./lib/response"
 
 class Parser
-  attr_reader :request_lines
+  attr_reader     :request_lines
 
   def initialize(request_lines)
     @request_lines = request_lines
   end
 
   def info
-    ["Verb: #{get_verb}",
-      "Path: #{get_path}",
-      "Protocol: #{get_protocol}",
-      "Host: #{get_host}",
-      "Port: #{get_port}",
-      "Origin: #{get_host}",
-      "#{get_accept}"]
+    ["Verb: #{get_verb}","Path: #{get_path}","Protocol: #{get_protocol}",
+      "Host: #{get_host}","Port: #{get_port}","Origin: #{get_host}","#{get_accept}"]
   end
 
   def get_verb
@@ -27,7 +19,7 @@ class Parser
     request_lines[0].split(" ")[1]
   end
 
-  def get_word_parameter
+  def get_word
     get_path.split(/\W+/)[-1]
   end
 
