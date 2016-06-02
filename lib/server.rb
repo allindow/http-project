@@ -23,7 +23,7 @@ class Server
       client.puts output
       client.close
       path          = request_lines[0].split(" ")[1]
-      exit if path == "/shutdown"
+      @tcp_server.close if path == "/shutdown"
       request_lines.slice!(0..-1)
     end
   end
