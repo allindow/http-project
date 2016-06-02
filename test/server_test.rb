@@ -24,6 +24,12 @@ class SeverTest < Minitest::Test
     assert response.success?
   end
 
+  def test_unlisted_page_returns_blue_pill_message
+    response = Faraday.get('http://127.0.0.1:9292/whatever')
+    assert response.body.include?("Take the blue pill")
+    assert response.success?
+  end
+
   def test_shutdown_page_closes_server
     skip
     response = Faraday.get('http://127.0.0.1:9292/shutdown')
@@ -32,4 +38,5 @@ class SeverTest < Minitest::Test
     `ruby ./lib/server.rb`
     sleep 5
   end
+
 end
