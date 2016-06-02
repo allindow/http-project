@@ -32,7 +32,7 @@ class Response
       "Nothing to see here. Take the blue pill & return to the Matrix."
     end
   end
-
+    
   def date_and_time
     Time.now.strftime("%m:%M%p on %A, %B %e, %Y ")
   end
