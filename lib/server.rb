@@ -5,8 +5,8 @@ require "pry"
 class Server
 
   def initialize
-    @response   = Response.new
-    @tcp_server = TCPServer.new(9292)
+    @response       = Response.new
+    @tcp_server     = TCPServer.new(9292)
   end
 
 
@@ -17,7 +17,7 @@ class Server
       while line = client.gets and !line.chomp.empty?
         request_lines << line.chomp
       end
-      output        = @response.path_controller(request_lines)
+      output        = "<html><head></head><body>" + @response.path_controller(request_lines) + "</body></html>"
       headers       = ["http/1.1 200 ok",
                       "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
                       "server: ruby",
