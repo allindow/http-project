@@ -27,6 +27,10 @@ class Parser
     request_lines[0].split(" ")[1]
   end
 
+  def get_word_parameter
+    get_path.split(/\W+/)[-1]
+  end
+
   def get_protocol
     request_lines[0].split(" ")[2]
   end
