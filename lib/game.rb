@@ -10,18 +10,20 @@ class Game
     @guess_tracker    = []
   end
 
-  def make_a_guess(guess)
-    guess = guess.to_i
-    @guess_tracker << guess
-    @guess_counter += 1
+    def guess_response(guess)
+      guess = guess.to_i
+      @guess_tracker << guess
+      @guess_counter += 1
+      feedback(guess)
+    end
+
+
+    def feedback(guess)
       if guess == 0 || guess > 100
         "You must follow the rules. Guess between 0 and 100."
-      elsif guess > @generated_number
-        too_high
-      elsif guess < @generated_number
-        too_low
-      elsif guess == @generated_number
-        correct
+      elsif guess > @generated_number; too_high
+      elsif guess < @generated_number; too_low
+      elsif guess == @generated_number; correct
       end
     end
 
@@ -35,8 +37,7 @@ class Game
     end
 
     def display_last_guess
-        if @generated_number.nil?
-          "Please start game."
+        if @generated_number.nil?; "Please start game."
         elsif last_guess > @generated_number
           last_guess_info + too_high
         elsif last_guess < @generated_number
