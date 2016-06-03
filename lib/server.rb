@@ -18,7 +18,9 @@ class Server
       end
       parser = Parser.new(request_lines)
       content_length = parser.get_content_length.to_i
+      if parser.get_verb == "POST"
       guess = client.read(content_length)
+      end
       output         = "<html><head></head><body>" + @response.path_controller(request_lines, guess) + "</body></html>"
       if parser.get_verb == "POST" && parser.get_path == "/game"
         client.puts redirect_headers(output)
