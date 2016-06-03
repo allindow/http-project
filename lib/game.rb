@@ -1,8 +1,8 @@
 
 class Game
-  attr_reader :guessing_number,
-              :guess_counter,
-              :guess_tracker
+  attr_reader        :guessing_number,
+                     :guess_counter,
+                     :guess_tracker
 
   def initialize
     @generated_number = nil
