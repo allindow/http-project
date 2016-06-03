@@ -1,8 +1,8 @@
 
 class Game
-  attr_reader :guessing_number,
-              :guess_counter,
-              :guess_tracker
+  attr_reader        :guessing_number,
+                     :guess_counter,
+                     :guess_tracker
 
   def initialize
     @generated_number = nil
@@ -11,11 +11,15 @@ class Game
   end
 
     def guess_response(guess)
-      guess = guess.to_i
-      @guess_tracker << guess
-      @guess_counter += 1
-      feedback(guess)
+      if guess.nil? || guess == ""
+        "You need to start a game."
+      else
+        guess = guess.to_i
+        @guess_tracker << guess
+        @guess_counter += 1
+        feedback(guess)
     end
+  end
 
 
     def feedback(guess)
