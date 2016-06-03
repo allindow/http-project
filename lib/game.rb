@@ -2,19 +2,21 @@
 class Game
   attr_reader        :guessing_number,
                      :guess_counter,
-                     :guess_tracker
+                     :guess_tracker,
+                     :started
 
   def initialize
     @generated_number = nil
     @guess_counter    = 0
     @guess_tracker    = []
+    @started = false
   end
 
-    def guess_response(guess)
-      if guess.nil? || guess == ""
+    def guess_response(input)
+      if input.nil? || input == "" || @started == false
         "You need to start a game."
       else
-        guess = guess.to_i
+        guess = input.to_i
         @guess_tracker << guess
         @guess_counter += 1
         feedback(guess)
@@ -64,6 +66,7 @@ class Game
     end
 
     def start
+      @started = true
       @generated_number = rand(0...100)
       "Good luck!"
     end
