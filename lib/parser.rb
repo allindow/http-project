@@ -39,4 +39,16 @@ class Parser
     accept_index = request_lines.find_index{|word| word.match( /Accept:/ ) }
     request_lines[accept_index]
   end
+
+  def get_guess
+    request_lines[-1]
+  end
+
+  def get_content_length
+    length_index = request_lines.find_index{|word| word.match( /Content-Length:/ ) }
+    if length_index != nil
+    request_lines[length_index].split(":")[1].strip
+  end
+end
+
 end

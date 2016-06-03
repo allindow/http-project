@@ -40,8 +40,6 @@ class SeverTest < Minitest::Test
     response = Faraday.get('http://127.0.0.1:9292/shutdown')
     assert response.body.include?("Total Requests:")
     assert response.success?
-    `ruby ./lib/server.rb`
-    sleep 5
   end
 
 end
