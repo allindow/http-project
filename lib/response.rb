@@ -27,19 +27,18 @@ class Response
         when '/'
           "<pre>" + main_output(request_lines).join("\n") + "</pre>"
         when '/hello'
-          @hello_counter += 1
-          "Hello World #{hello_counter}\n"
+          hello
         when '/datetime'
           date_and_time
         when '/shutdown'
-          "Total Requests: #{request_counter}"
+          shutdown
         when "/word_search?word=#{word}"
           word_search = WordSearch.new(word)
           word_search.result
         when '/game'
           game.display_last_guess
         else
-          "Nothing to see here. Take the blue pill & return to the Matrix."
+          matrix_response
         end
       elsif verb == "POST"
         case path
@@ -48,7 +47,7 @@ class Response
           when '/game'
             game.guess_response(guess)
           else
-            "Nothing to see here. Take the blue pill & return to the Matrix."
+            matrix_response
           end
         end
       end
@@ -59,5 +58,18 @@ class Response
 
   def main_output(request_lines)
     Parser.new(request_lines).info
+  end
+
+  def matrix_response
+      "Nothing to see here. Take the blue pill & return to the Matrix."
+  end
+
+  def shutdown
+    "Total Requests: #{request_counter}"
+  end
+
+  def hello
+    @hello_counter += 1
+    "Hello World #{hello_counter}\n"
   end
 end
