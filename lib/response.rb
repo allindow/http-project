@@ -46,7 +46,7 @@ class Response
           when '/start_game'
             game.start
           when '/game'
-            game.make_a_guess(guess)
+            game.guess_response(guess)
           else
             "Nothing to see here. Take the blue pill & return to the Matrix."
           end

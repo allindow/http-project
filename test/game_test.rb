@@ -36,18 +36,18 @@ class GameTest < Minitest::Test
 
   def test_making_a_guess
     game.start
-    response = game.make_a_guess(5)
+    response = game.guess_response(5)
     assert_equal true, response.include?("Guess")
   end
 
   def test_not_following_the_rules
     game.start
-    assert_equal "You must follow the rules. Guess between 0 and 100.", game.make_a_guess("Hello")
+    assert_equal "You must follow the rules. Guess between 0 and 100.", game.guess_response("Hello")
   end
 
   def test_display_last_guess
     game.start
-    game.make_a_guess(5)
+    game.guess_response(5)
     assert_equal "Your last guess was 5. ""You have made 1 guess/es. ""Guess is too low", game.display_last_guess
   end
 end
