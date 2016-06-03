@@ -9,8 +9,6 @@ class Server
     @tcp_server     = TCPServer.new(9292)
   end
 
-
-
   def open
     loop do
       client        = @tcp_server.accept
@@ -28,7 +26,6 @@ class Server
         client.puts headers(output)
       end
       client.puts output
-
       client.close
       path          = request_lines[0].split(" ")[1]
       @tcp_server.close if path == "/shutdown"

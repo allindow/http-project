@@ -13,7 +13,6 @@ class Response
     @game            = Game.new
   end
 
-
   def path_controller(request_lines, guess = nil)
     @request_counter += 1
     parser = Parser.new(request_lines)
